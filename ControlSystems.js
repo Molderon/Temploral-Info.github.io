@@ -385,7 +385,8 @@
         });
 
         // Random cyber text effects
-        const cyberTexts = ['CONNECTING...', 'NEURAL LINK ESTABLISHED', 'QUANTUM SYNC ACTIVE', 'REALITY MATRIX LOADED'];
+        const cyberTexts = ['R&D...','DATA SCINECE','INDUSTRIAL REVOLUTIONS','NEURO-SYMBOLICS', 'SYSTEM ARCHITECTURE','NEUROMORPHIC COMPUTING','INTERNET FREEDOM', 'COMPUTER SCIENCE', 'ROBOTICS', 'CONTROL THEORY', 'MACHINE LEARNING', 'DEEP LEARNING', 'DIGITAL TWINS', 'SECURE CODING', 'PERSOMALIZED MEDICINE', 'SCIENCE FICTION', 'OPEN SOURCE'
+        ];
         
         setInterval(() => {
             const randomText = cyberTexts[Math.floor(Math.random() * cyberTexts.length)];
