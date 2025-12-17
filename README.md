@@ -1,2 +1,2 @@
 # Temploral-Info.github.io
-Schedule for Ph.D students
+Cool IRC/Info page for Ph.D Students
