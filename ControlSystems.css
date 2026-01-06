@@ -1232,6 +1232,9 @@
         }
 
         .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -1257,6 +1260,7 @@
 
         .form-group label {
             display: block;
+            margin-bottom: 10px;
             color: var(--primary-cyan);
             font-weight: 600;
             text-transform: uppercase;
@@ -1295,21 +1299,109 @@
 
         .form-group textarea {
             resize: vertical;
-            min-height: 120px;
+            min-height: 170px;
         }
 
-        .btn-submit {
+        .submit-btn {
             width: 100%;
-            cursor: pointer;
-            font-size: 1rem;
-            margin-top: 1rem;
+            padding: 15px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            color: var(--darker-bg);
             border: none;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-family: inherit;
+            clip-path: polygon(20px 0%, 100% 0%, calc(100% - 20px) 100%, 0% 100%);
         }
 
-        .btn-submit:hover {
+        .submit-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 15px 40px rgba(229, 231, 235, 0.4);
+        }
+
+        .contact-info {
+            padding: 40px;
+        }
+
+        .contact-info h3 {
+            font-family: inherit;
+            font-size: 2rem;
+            margin-bottom: 0.9rem;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .info-item {
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .info-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .info-details h4 {
+            color: var(--primary-cyan);
+            opacity: 0.7;            
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+        }
+
+        .info-details p {
+            opacity: 0.7;
+        }
+
+        /* Map Section */
+        .map-container {
+            margin-top: 40px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            clip-path: polygon(30px 0%, 100% 0%, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0% 100%, 0% 30px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+        }
+
+        .map-placeholder {
+            text-align: center;
+            opacity: 0.7;
+        }
+
+        .map-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 40%, rgba(208, 0, 255, 0.127) 50%, transparent 60%);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         /* Footer */
