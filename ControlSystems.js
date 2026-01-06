@@ -422,33 +422,99 @@
         `;
         document.head.appendChild(style);
 
-        // Contact form submission
-        document.querySelector('.btn-submit').addEventListener('click', function(e) {
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            if (name && email && message) {
-                // Simulate form submission
-                this.textContent = 'TRANSMITTING...';
-                this.style.background = 'linear-gradient(135deg, var(--primary-cyan), var(--primary-pink))';
-                
-                setTimeout(() => {
-                    this.textContent = 'TRANSMISSION COMPLETE';
-                    this.style.background = 'var(--primary-cyan)';
-                    
-                    // Clear form
-                    document.getElementById('name').value = '';
-                    document.getElementById('email').value = '';
-                    document.getElementById('message').value = '';
-                    
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        this.textContent = 'Transmit Message';
-                        this.style.background = '';
-                    }, 3000);
-                }, 2000);
-            }
+            // Add your form submission logic here
+            alert('Message sent! We\'ll get back to you soon.');
+            this.reset();
         });
+
+        // Initialize particles
+        createParticles();
+
+        // Text rotation with character animation
+        const textSets = document.querySelectorAll('.text-set');
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        function wrapTextInSpans(element) {
+            const text = element.textContent;
+            element.innerHTML = text.split('').map((char, i) => 
+                `<span class="char" style="animation-delay: ${i * 0.05}s">${char === ' ' ? '&nbsp;' : char}</span>`
+            ).join('');
+        }
+
+        function animateTextIn(textSet) {
+            const glitchText = textSet.querySelector('.glitch-text');
+            const subtitle = textSet.querySelector('.subtitle');
+            
+            // Wrap text in spans for animation
+            wrapTextInSpans(glitchText);
+            
+            // Update data attribute for glitch effect
+            glitchText.setAttribute('data-text', glitchText.textContent);
+            
+            // Show subtitle after main text
+            setTimeout(() => {
+                subtitle.classList.add('visible');
+            }, 800);
+        }
+
+        function animateTextOut(textSet) {
+            const chars = textSet.querySelectorAll('.char');
+            const subtitle = textSet.querySelector('.subtitle');
+            
+            // Animate characters out
+            chars.forEach((char, i) => {
+                char.style.animationDelay = `${i * 0.02}s`;
+                char.classList.add('out');
+            });
+            
+            // Hide subtitle
+            subtitle.classList.remove('visible');
+        }
+
+        function rotateText() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const currentSet = textSets[currentIndex];
+            const nextIndex = (currentIndex + 1) % textSets.length;
+            const nextSet = textSets[nextIndex];
+
+            // Animate out current text
+            animateTextOut(currentSet);
+
+            // After out animation, switch sets
+            setTimeout(() => {
+                currentSet.classList.remove('active');
+                nextSet.classList.add('active');
+                animateTextIn(nextSet);
+                
+                currentIndex = nextIndex;
+                isAnimating = false;
+            }, 600);
+        }
+
+        // Initialize first text set
+        textSets[0].classList.add('active');
+        animateTextIn(textSets[0]);
+
+        // Start rotation after initial display
+        setTimeout(() => {
+            setInterval(rotateText, 5000); // Change every 5 seconds
+        }, 4000);
+
+        // Add random glitch effect
+        setInterval(() => {
+            const glitchTexts = document.querySelectorAll('.glitch-text');
+            glitchTexts.forEach(text => {
+                if (Math.random() > 0.95) {
+                    text.style.animation = 'none';
+                    setTimeout(() => {
+                        text.style.animation = '';
+                    }, 200);
+                }
+            });
+        }, 3000);
